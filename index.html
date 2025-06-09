@@ -1,0 +1,145 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Neodemia Air</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "@xenova/transformers": "https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.1",
+        "./main.js": "./main.js",
+        "./model.js": "./model.js"
+      }
+    }
+    </script>
+  </head>
+  <body class="theme-air">
+    <div id="loading-overlay">
+        <div id="loading-box">
+            <img id="loading-logo" src="/neodemia-logo.png" alt="Neodemia Logo">
+            <p id="loading-status">Browser Initializing...</p>
+            <div id="loading-progress-bar">
+                <div id="loading-progress"></div>
+            </div>
+            <p id="loading-file"></p>
+        </div>
+    </div>
+
+    <!-- Additional gradient overlay -->
+    <div id="gradient-overlay"></div>
+    <div id="grid-overlay"></div>
+    
+    <!-- Fireflies effect -->
+    <div id="fireflies"></div>
+
+    <div class="container">
+      <h1 id="theme-title">Neodemia Air<span id="vip-badge"></span></h1>
+      <div class="search-container">
+        <input id="query-input" type="text" placeholder="Search..."/>
+        <button id="search-button"><img src="/send-icon.png" alt="Search"></button>
+      </div>
+      <div id="results" class="results-container"></div>
+      <div class="top-right-icons">
+        <img src="/account-icon.png" id="account-icon" class="header-icon" alt="Account">
+        <div class="menu-icon" id="menu-icon">&#9776;</div>
+      </div>
+      <div id="countdown-timer"></div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal-overlay" class="modal-overlay">
+      <div class="modal-content">
+        <span id="login-close-button" class="close-button">&times;</span>
+        <h2 class="modal-title">Admin Login</h2>
+        <div id="login-error" class="login-error-message"></div>
+        <div class="setting-item">
+          <label for="username-input" class="setting-label">Username</label>
+          <input id="username-input" type="text" class="login-input" placeholder="Enter username">
+        </div>
+        <div class="setting-item">
+          <label for="password-input" class="setting-label">Password</label>
+          <input id="password-input" type="password" class="login-input" placeholder="Enter password">
+        </div>
+        <button id="login-button" class="login-submit-btn">Login</button>
+      </div>
+    </div>
+
+    <!-- Modal (Settings & Guide) -->
+    <div id="modal-overlay" class="modal-overlay">
+      <div class="modal-content">
+        <span id="close-button" class="close-button">&times;</span>
+        <div class="modal-tabs">
+          <div id="tab-settings" class="modal-tab active">Settings</div>
+          <div id="tab-guide" class="modal-tab">Guide</div>
+        </div>
+        <!-- Settings Section -->
+        <div id="modal-content-settings" class="modal-section active">
+          <!-- Theme selection -->
+          <div class="setting-item">
+            <label class="setting-label" for="theme-select">Theme</label>
+            <select id="theme-select" class="setting-select">
+              <option value="air" selected>Neodemia Air</option>
+              <option value="forest">Neodemia Forest</option>
+              <option value="cosmic">Neodemia Cosmic</option>
+            </select>
+          </div>
+          <!-- Detail (Max Tokens) -->
+          <div class="setting-item">
+            <label class="setting-label" for="length-slider">Detail</label>
+            <input id="length-slider" class="settings-slider" type="range" min="64" max="512" step="16" value="256"/>
+            <div class="slider-value" id="length-display">256</div>
+          </div>
+          <!-- Craziness (Sampling Temperature) -->
+          <div class="setting-item">
+            <label class="setting-label" for="temp-slider">Craziness</label>
+            <input id="temp-slider" class="settings-slider" type="range" min="0.5" max="1.5" step="0.1" value="1.0"/>
+            <div class="slider-value" id="temp-display">1.0</div>
+          </div>
+          <!-- Accuracy (Top-p) -->
+          <div class="setting-item">
+            <label class="setting-label" for="topp-slider">Accuracy</label>
+            <input id="topp-slider" class="settings-slider" type="range" min="0.7" max="1.0" step="0.05" value="0.9"/>
+            <div class="slider-value" id="topp-display">0.9</div>
+          </div>
+          <!-- Focus (Number of Beams) -->
+          <div class="setting-item">
+            <label class="setting-label" for="beams-slider">Focus</label>
+            <input id="beams-slider" class="settings-slider" type="range" min="1" max="10" step="1" value="3"/>
+            <div class="slider-value" id="beams-display">3</div>
+          </div>
+          <!-- Background Blur Option -->
+          <div class="setting-item blur-option">
+            <label class="setting-label" for="blur-select">Background Blur</label>
+            <select id="blur-select" class="setting-select">
+              <option value="0px">None</option>
+              <option value="10px" selected>Mid</option>
+              <option value="20px">High</option>
+            </select>
+          </div>
+          <!-- Sound Effects Toggle -->
+          <div class="setting-item">
+            <label class="setting-label" for="sound-toggle">Sound Effects</label>
+            <label class="switch">
+                <input type="checkbox" id="sound-toggle">
+                <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+        <!-- Guide Section -->
+        <div id="modal-content-guide" class="modal-section">
+          <p style="font-size:0.9rem; line-height:1.4;">
+            <strong>How to use Neodemia:</strong><br>
+            1. Enter your query in the search box and click "Search" or press Enter.<br>
+            2. Adjust advanced settings as desired.<br>
+            3. Switch themes to instantly change the look.<br>
+            4. Once the answer appears, click "Explain Further" for more details.<br>
+            5. Enjoy the modern, app-like experience!
+          </p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
